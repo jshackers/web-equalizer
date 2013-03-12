@@ -1,0 +1,15 @@
+Basic notes on "what's to be done"
+
+
+Functionality:
+Constructor with sound source and settings object
+Set of webaudio nodes to split sound into N channels and merge back
+Webaudio capabilities detection (future proof browser support, no browser sniffing)
+
+GUI:
+Simple vertical slider control for setting values
+Overlay control with the whole equalizer
+Themability
+
+Architecture:
+coming soon
