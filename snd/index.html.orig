@@ -1,0 +1,39 @@
+<hmtl>
+<head>
+<meta charset="utf8">
+<style type="text/css">
+#ctrl span{
+margin: 5px;
+padding: 5px;
+cursor: pointer;
+background: #222;
+color: #fffffa;
+border: 1px solid #ddd;
+display: inline-block;
+}
+</style>
+</head>
+<body>
+  <div id="ctrl">
+    <div id="bass">
+      <span title="5">ramp it up!</span>bass
+      <span title="-5">oops, too much</span>
+    </div>
+    <div id="treble">
+      <span title="5">ramp it up!</span>treble
+      <span title="-5">oops, too much</span>
+    </div>
+  </div>
+  
+  
+  <div id="music">
+  thepianoguys.com
+    <audio controls="controls" src="test.mp3"></audio>
+  </div>
+  
+
+  <script src="snd.js"></script>
+</body>
+</hmtl>
+
+
