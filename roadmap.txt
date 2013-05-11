@@ -9,7 +9,14 @@ Webaudio capabilities detection (future proof browser support, no browser sniffi
 GUI:
 Simple vertical slider control for setting values
 Overlay control with the whole equalizer
-Themability
+Themability [by css?]
 
 Architecture:
-coming soon
+
+eqEngine - splits sound to channels and allows changing settings on them
+ '- nSplitter - does the splitting to n channels by frequency, allows access to each channel
+ '- chan - an abstraction over a single channel - wraps the channel and has methods for manipulation (volume for starters)
+
+ui - shows a control for setting volume of channels
+ '- panel - aggregates the sliders
+ '- slider
