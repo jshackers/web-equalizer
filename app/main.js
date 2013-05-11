@@ -6,6 +6,29 @@ var band = function(){
 	
 }
 
+var eq = (function(argument) {
+
+  var eqContainer = document.querySelector('#eq');
+  var inputs = eqContainer.querySelectorAll('input[type="range"]');
+
+  eqContainer.addEventListener('submit', formSubmitHandler, false);
+
+  function formSubmitHandler (event) {
+    event.preventDefault();
+    var controls = [];
+
+    Array.prototype.map.call(inputs, function(element, index) {
+      return controls[index] = element.value;
+    });
+
+    console.log(controls);
+
+    nSplitter.setBands(controls);
+    
+  }
+}());
+
+
 //change it to require a file from engine
 var nSplitter = (function(){
 
@@ -66,6 +89,8 @@ var nSplitter = (function(){
 return function(node){
 
 	nSplitter.init(node);
+
+
 
 	
 
