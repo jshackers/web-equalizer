@@ -1,0 +1,42 @@
+<html>
+<head>
+<script>
+window.onload = init;
+var ctx;
+var gs = [];
+function init(){
+    ctx = new webkitAudioContext();
+    tag = document.getElementById("test");
+    tag.currentTime = 90;
+    tag.play();
+    src = ctx.createMediaElementSource(tag);
+
+    var fs = [60, 170, 310, 600, 1000, 3000, 6000, 12000, 14000, 16000];
+    var qs = [ 1,   1,   1,   1,    1,    1,    1,     2,    10,    10];
+    for (i=0; i<fs.length; i++)
+    {
+        var f = ctx.createBiquadFilter();
+        f.type = "bandpass";
+        f.frequency.value = fs[i];
+        f.Q.value = qs[i];
+        var g = ctx.createGainNode();
+        g.gain.value = 0.55;
+        src.connect(f);
+        f.connect(g)
+        g.connect(ctx.destination);
+        gs[i] = g;
+    }
+}
+function mod()
+{
+    for (i=0; i<gs.length; i++)
+    {
+        gs[i].gain.value = i < arguments.length ? arguments[i] : 0;
+    }
+}
+</script>
+</head>
+<body>
+<audio id="test" src="./bass.mp3" controls="controls"/>
+</body>
+</html>
