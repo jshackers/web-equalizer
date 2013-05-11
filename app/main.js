@@ -9,38 +9,67 @@ var band = function(){
 //change it to require a file from engine
 var nSplitter = (function(){
 
-	var source,bands=[],
-	context = new webkitAudioContext();
+	var src,bands=[],
+	ctx = new webkitAudioContext();
 
-	function setSource(audio){
-		source = context.createMediaElementSource(audio);
+	//tmp stuff
+	var fs = [60, 170, 310, 600, 1000, 3000, 6000, 12000, 14000, 16000];
+	//the higher the value, the narrower the span of frequencies
+	var qs = [ 1,   1,   1,   1,    1,    1,    1,     2,    10,    10];
+
+
+	function init(audio,n){
+		n = n?n:10;
+		src = ctx.createMediaElementsrc(audio);
+
+		splitTo(n);
 
 	}
 
 	function splitTo(n){
 		//split sound to n Bands
+		for (var i=0; i<n; i++)
+		{
+			var f = ctx.createBiquadFilter();
+			f.type = "bandpass";
+			f.frequency.value = fs[i];
+			f.Q.value = qs[i];
+			var g = ctx.createGainNode();
+			g.gain.value = 0.55;
+			src.connect(f);
+			f.connect(g)
+			g.connect(ctx.destination);
+			//gain node is saved as a band
+			bands[i] = g;
+		}
 
-		//save each band in bands array
-		bands.push({
-			mynode
-		})
+		
 	}
 
 	function getBand(num){
 		return band[num];
 	} 
 
+	function setBands(valueArr){
+		for (var i = 0; i <valueArr.length; i+=1) {
+			getBand(i).gain.value = valueArr[i];			
+		}
+
 	return{
-		setSource:setSource,
-		splitTo:splitTo,
-		getBand:getBand
+		init:init,
+		getBand:getBand,
+		setBands:setBands
 	}
 })();
 
 
 return function(node){
 
-	nSplitter.setSource(node);
+	nSplitter.init(node);
+
+	
+
+
 
 	return nSplitter;
 
