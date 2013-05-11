@@ -2,6 +2,11 @@
 var webEq = (function(){
 
 //change it to require a file from engine
+var band = function(){
+	
+}
+
+//change it to require a file from engine
 var nSplitter = (function(){
 
 	var source,bands=[],
@@ -16,6 +21,9 @@ var nSplitter = (function(){
 		//split sound to n Bands
 
 		//save each band in bands array
+		bands.push({
+			mynode
+		})
 	}
 
 	function getBand(num){
@@ -34,6 +42,7 @@ return function(node){
 
 	nSplitter.setSource(node);
 
+	return nSplitter;
 
 }
 
